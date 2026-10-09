@@ -23,10 +23,10 @@ sign-in if you skipped it.
 
 ## Connector URL
 
-`https://api-prod.tuney.io/cue-engine2/connector/mcp`. You can also add it directly without the plugin:
+`https://api.tuney.io/cue-engine2/connector/mcp`. You can also add it directly without the plugin:
 
 ```bash
-claude mcp add --transport http tuney https://api-prod.tuney.io/cue-engine2/connector/mcp
+claude mcp add --transport http tuney https://api.tuney.io/cue-engine2/connector/mcp
 ```
 
 ## Validate

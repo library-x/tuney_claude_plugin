@@ -2,7 +2,7 @@
   "mcpServers": {
     "tuney": {
       "type": "http",
-      "url": "https://api-prod.tuney.io/cue-engine2/connector/mcp"
+      "url": "https://api.tuney.io/cue-engine2/connector/mcp"
     }
   }
 }
