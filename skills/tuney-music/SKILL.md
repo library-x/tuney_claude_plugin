@@ -23,9 +23,24 @@ Tuney (`/mcp` in Claude Code, or the Tuney connector on claude.ai) and sign in.
 5. Only call `download_track` when the user asks for the file. It spends Tuney credits. Give the
    link promptly because signed links expire. Use `format="stems"` when the user will mix it.
 
+## Presenting results
+
+- When a track is ready, show: name, length in seconds, bpm, key, genre and mood, and the preview
+  link. Then offer stems and adjustments (length, tempo, key, muting stems).
+- If you can open web pages (the Claude desktop app's browser pane, `navigate` or `preview_start`),
+  open the preview URL there so the user can listen immediately; the page shows a standard audio
+  player. Otherwise give the link.
+- Stems: call `download_track` with `format: "stems"`, then fetch the zip from `download_url`,
+  unzip it, rename each file with the `contents` map in the result (`2.mp3` melody, `3.mp3`
+  chords, `4.mp3` bass, `Drums.mp3` drums, `Swoosh.mp3` swoosh fx, `Impact.mp3` impact fx) and
+  attach the files to the conversation (for example with SendUserFile), one card per stem. All
+  stems are the full length of the track and line up in a DAW.
+- A download that returns a `task_id` is still rendering: call `wait_for_task` with
+  `kind: "download"` until it returns `download_url`.
+
 ## Rules
 
-- Never download repeatedly to "try" formats; previews are free, downloads are not.
+- Never download repeatedly to "try" formats, and never download the same track twice; previews are free, downloads are not.
 - If a tool reports missing credits, show the purchase link it returns and stop.
 - Lengths are seconds between 5 and 600. Round to the user's real need, not the nearest minute.
 - Keep responses short: track name, length, bpm, key, preview link.
