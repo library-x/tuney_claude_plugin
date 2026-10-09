@@ -21,14 +21,15 @@ Tuney (`/mcp` in Claude Code, or the Tuney connector on claude.ai) and sign in.
    clip length), `time_stretch` or `pitch_shift` for feel and key, `mute` to drop stems such as
    drums for voice-over sections, `turning_point_seconds` to make the music change character at a
    given second (combine with `length_seconds` to lengthen a track and place the turning point in
-   one call). Every adjustment returns a task; wait for it.
+   one call), `ending` for a `fade_out` or `short` ending, `regenerate` with stem names for a fresh
+   take. Every adjustment returns a task; wait for it.
 5. Only call `download_track` when the user asks for the file. It spends Tuney credits. Give the
    link promptly because signed links expire. Use `format="stems"` when the user will mix it.
 
 ## Presenting results
 
 - When a track is ready, show: name, length in seconds, bpm, key, genre and mood, and the preview
-  link. Then offer stems and adjustments (length, tempo, key, muting stems, a turning point).
+  link. Then offer stems and adjustments (length, ending, turning point, tempo, key, muting or regenerating stems).
 - If you can open web pages (the Claude desktop app's browser pane, `navigate` or `preview_start`),
   open the preview URL there so the user can listen immediately; the page shows a standard audio
   player. Otherwise give the link.
