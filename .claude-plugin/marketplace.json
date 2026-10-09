@@ -1,0 +1,14 @@
+{
+  "name": "tuney",
+  "owner": {
+    "name": "Tuney",
+    "url": "https://tuney.io"
+  },
+  "plugins": [
+    {
+      "name": "tuney",
+      "source": "./",
+      "description": "Tuney MCP connector plus a skill for finding, generating and downloading music."
+    }
+  ]
+}

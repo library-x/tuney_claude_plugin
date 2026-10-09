@@ -1,0 +1,20 @@
+{
+  "name": "tuney",
+  "displayName": "Tuney Music",
+  "description": "Find, generate, adjust and download hand-made, modular music fitted to your exact length, through the Tuney MCP connector.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Tuney",
+    "url": "https://tuney.io"
+  },
+  "homepage": "https://tuney.io",
+  "repository": "https://github.com/library-x/tuney_claude_plugin",
+  "keywords": [
+    "music",
+    "audio",
+    "soundtrack",
+    "royalty-free",
+    "video",
+    "podcast"
+  ]
+}
