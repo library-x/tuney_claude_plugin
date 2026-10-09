@@ -19,14 +19,16 @@ Tuney (`/mcp` in Claude Code, or the Tuney connector on claude.ai) and sign in.
    `wait_for_task` with the returned `task_id`. Call `wait_for_task` again if it reports a timeout.
 4. Fit the track with `adjust_track`: `length_seconds` for an exact duration (for video, use the
    clip length), `time_stretch` or `pitch_shift` for feel and key, `mute` to drop stems such as
-   drums for voice-over sections. Every adjustment returns a task; wait for it.
+   drums for voice-over sections, `turning_point_seconds` to make the music change character at a
+   given second (combine with `length_seconds` to lengthen a track and place the turning point in
+   one call). Every adjustment returns a task; wait for it.
 5. Only call `download_track` when the user asks for the file. It spends Tuney credits. Give the
    link promptly because signed links expire. Use `format="stems"` when the user will mix it.
 
 ## Presenting results
 
 - When a track is ready, show: name, length in seconds, bpm, key, genre and mood, and the preview
-  link. Then offer stems and adjustments (length, tempo, key, muting stems).
+  link. Then offer stems and adjustments (length, tempo, key, muting stems, a turning point).
 - If you can open web pages (the Claude desktop app's browser pane, `navigate` or `preview_start`),
   open the preview URL there so the user can listen immediately; the page shows a standard audio
   player. Otherwise give the link.
