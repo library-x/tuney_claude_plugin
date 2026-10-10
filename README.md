@@ -29,6 +29,11 @@ sign-in if you skipped it.
 claude mcp add --transport http tuney https://api.tuney.io/cue-engine2/connector/mcp
 ```
 
+
+## Other assistants and editors
+
+The same Tuney MCP server works in claude.ai, Claude Desktop, ChatGPT, Cursor, VS Code, Codex CLI, Gemini CLI and any other MCP client. Install instructions for each are in [library-x/tuney_mcp](https://github.com/library-x/tuney_mcp).
+
 ## Validate
 
 ```bash
