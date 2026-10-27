@@ -21,6 +21,9 @@ sign-in if you skipped it.
 - `adjust_track`: change length, tempo, key, or mute stems
 - `download_track`: mp3, wav or stems (uses your Tuney credits)
 
+Score a video: send a video by link or upload, and get music composed to its cuts that ends before
+the sonic logo, with the video rendered under it.
+
 ## Connector URL
 
 `https://api.tuney.io/cue-engine2/connector/mcp`. You can also add it directly without the plugin:
