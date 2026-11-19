@@ -6,15 +6,31 @@ description: Use when the user needs background music, a soundtrack, a jingle, a
 # Tuney music
 
 Tuney composes royalty-free music from hand-made, modular elements and fits it to an exact length.
-All work goes through the `tuney` MCP connector; if its tools are missing, tell the user to connect
-Tuney (`/mcp` in Claude Code, or the Tuney connector on claude.ai) and sign in.
+All work goes through the `tuney` MCP connector; if its tools are missing, tell the user to add the
+Tuney connector (`/mcp` in Claude Code, or the Tuney connector on claude.ai). No sign-in is needed.
+
+## Without sign-in, and signed in
+
+- **Without sign-in** every tool works. Results then say `listen_only`: all audio has a pulsing
+  tone over it (previews, downloads and the music in rendered videos), and downloads are free.
+  Tell the user once, in a sentence, and carry on.
+- **Signed in**, audio is clean and downloads spend the user's Tuney credits.
+- Call `sign_in` only when the user asks to sign in or wants clean files. Say first what happens:
+  the app shows its Tuney sign-in (in Claude Code: `/mcp`, choose Tuney, Authenticate), an account
+  is free to create, and the Tuney tools may pause until they finish.
+- After they have signed in, call `get_track` with the `cue_id` of each track made before: it comes
+  back clean under a new `cue_id` (the result says `copied_from`). Use the new id from then on, and
+  call `render_video` again to get clean music under a video.
+- If a tool says the free tries for this hour are used up, tell the user and offer `sign_in`.
 
 ## Workflow
 
-1. Turn the brief into a style. If the user names a genre, mood or tempo, call `list_styles` once
-   and use the exact values it returns. Otherwise pass the brief as a free-text `prompt`.
-2. Prefer `find_tracks` first: results are instant and previews are free. Offer two or three
-   options with their preview links and lengths.
+1. Turn the brief into a style: call `list_styles` once and pick the genre, mood and tempo that fit
+   (one or two of them is enough). `find_tracks` matches those exactly. A free-text `prompt` is
+   matched on overall feel only and knows nothing about instruments, so use it when no style fits,
+   and check the genre, mood and tempo of what comes back.
+2. Prefer `find_tracks` first: previews are free. It returns three tracks by default; offer them
+   with their preview links and lengths.
 3. Use `generate_track` when nothing fits or the user needs a specific length from the start, then
    `wait_for_task` with the returned `task_id`. Call `wait_for_task` again if it reports a timeout.
 4. Fit the track with `adjust_track`: `length_seconds` for an exact duration (for video, use the
@@ -23,8 +39,9 @@ Tuney (`/mcp` in Claude Code, or the Tuney connector on claude.ai) and sign in.
    given second (combine with `length_seconds` to lengthen a track and place the turning point in
    one call), `ending` for a `fade_out` or `short` ending, `regenerate` with stem names for a fresh
    take. Every adjustment returns a task; wait for it.
-5. Only call `download_track` when the user asks for the file. It spends Tuney credits. Give the
-   link promptly because signed links expire. Use `format="stems"` when the user will mix it.
+5. Only call `download_track` when the user asks for the file. Signed in, it spends Tuney credits;
+   without sign-in it is free and the file has the pulsing tone. Give the link promptly because
+   signed links expire. Use `format="stems"` when the user will mix it.
 
 ## Scoring a video
 
@@ -62,7 +79,7 @@ Tuney (`/mcp` in Claude Code, or the Tuney connector on claude.ai) and sign in.
 
 ## Rules
 
-- Never download repeatedly to "try" formats, and never download the same track twice; previews are free, downloads are not.
+- Never download repeatedly to "try" formats, and never download the same track twice; previews are free, and a signed-in download spends credits.
 - If a tool reports missing credits, show the purchase link it returns and stop.
 - Videos: up to 100 MB through the upload link, up to 200 MB and 10 minutes through import_video.
 - Lengths are seconds between 5 and 600. Round to the user's real need, not the nearest minute.

@@ -11,15 +11,16 @@ claude plugin marketplace add library-x/tuney_claude_plugin
 claude plugin install tuney@tuney
 ```
 
-Then run `/mcp` in Claude Code and sign in with your Tuney account. The first tool call prompts for
-sign-in if you skipped it.
+No sign-in is needed: everything works straight away, and the audio then has a pulsing tone over it.
+For clean files, ask Claude to sign you in to Tuney, or run `/mcp` in Claude Code, choose Tuney and
+pick Authenticate. An account is free to create, and the tracks you made before come along.
 
 ## What you get
 
-- `find_tracks`: instant, free previews for a brief or a genre, mood and tempo
+- `find_tracks`: free previews for a genre, mood and tempo, or a brief
 - `generate_track`: a new track composed to an exact length
 - `adjust_track`: change length, tempo, key, or mute stems
-- `download_track`: mp3, wav or stems (uses your Tuney credits)
+- `download_track`: mp3, wav or stems (signed in: clean, uses your Tuney credits; without sign-in: free, with the tone)
 
 Score a video: send a video by link or upload, and get music composed to its cuts that ends before
 the sonic logo, with the video rendered under it.
